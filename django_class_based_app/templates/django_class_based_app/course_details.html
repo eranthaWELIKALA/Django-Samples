@@ -1,0 +1,24 @@
+{% extends 'django_class_based_app/base.html' %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block body %}
+<div class="grid-x grid-padding-x">
+    <div class="cell">
+        <h1>{{ title }}</h1>
+        <div class="card">
+            <div class="card-divider">
+                {{course.title}}</p>
+            </div>
+            <div class="card-section">
+                {{course.description}}</p>
+            </div>
+        </div>
+
+        <ul><h4>Course List</h4>
+            {% for course in course_detail_list %}
+                <li><a href="{% url 'django_cb_views:course_detail' course.id %}">{{ course.title }} - {{ course.description }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'django_template_tags/base.html' %}
+{% load custom_tags %}
+
+{% block page_title %}Custom Tags{% endblock %}
+{% block body %}
+    <h1>Django Custom Tags</h1>
+    {% include 'django_template_tags/components/navbar.html' %}
+    <h3>Today is {% current_date %}</h3>
+    <h3>Current time: {% current_time %}</h3>
+
+    <h3>List separeted by " | "</h3>
+    <p>{% separate_by_symbols 'list_items' %}</p>
+
+    <h3>List separeted by " // "</h3>
+    <p>{% separate_by_symbols 'list_items' ' // ' %}</p>
+
+    <h3>As Unordered list</h3>
+    <p>{% ul_list 'list_items' %}</p>
+{% endblock %}

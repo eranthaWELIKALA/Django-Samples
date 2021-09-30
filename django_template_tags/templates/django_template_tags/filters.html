@@ -1,0 +1,11 @@
+{% extends 'django_template_tags/base.html' %}
+{% load custom_filters %}
+
+{% block page_title %}Custom Filters{% endblock %}
+{% block body %}
+    <h1>Django Custom Filters</h1>
+    {% include 'django_template_tags/components/navbar.html' %}
+    <h3>{{ "to upper"|to_upper }}</h3>
+    <h3>{{ "TO LOWER"|to_lower }}</h3>
+    <h3>{{ "to camelcase"|to_camel_case }}</h3>
+{% endblock %}

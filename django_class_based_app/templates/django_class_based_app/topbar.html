@@ -1,0 +1,17 @@
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text">Class Based Views</li>
+      <li><a href="{% url 'django_cb_views:index' %}">Create Course</a></li>
+      <li><a href="{% url 'django_cb_views:course_create' %}">Course Form</a></li>
+      <li><a href="{% url 'django_cb_views:course_list' %}">Course List</a></li>
+      <li><a href="{% url 'django_cb_views:course_non_empty_list' %}">Non Empty Course List</a></li>
+      <li><a href="{% url 'django_cb_views:course_detail' 1 %}">Course Detail View</a></li>
+      {% if user.is_authenticated %}
+      <li><a href="/admin/logout/">Logout</a></li>
+      {% else%}
+      <li><a href="/admin/login/">Login</a></li>
+      {% endif%}
+    </ul>
+  </div>
+</div>

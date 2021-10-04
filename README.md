@@ -3,3 +3,4 @@ This repository contains django applications which was implemented to try out di
 
 1. Custom Tag/ Filters
 2. Class Based Views
+3. Email Sending

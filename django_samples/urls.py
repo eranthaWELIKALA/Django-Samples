@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('template-tags/', include(('django_template_tags.urls', 'django_template_tags'))),
     path('class-based-views/', include(('django_class_based_app.urls', 'django_cb_views'))),
+    path('send-mail/', include(('django_send_mails.urls', 'django_send_mails'))),
 ]

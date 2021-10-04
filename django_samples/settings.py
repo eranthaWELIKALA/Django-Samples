@@ -14,6 +14,12 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_DIR = Path(__file__).resolve().parent
+
+# Access configparser to load variable values
+import configparser
+config = configparser.SafeConfigParser(allow_no_value=True)
+config.read('%s/django_sample.config' % (PROJECT_DIR))
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_template_tags.apps.DjangoTemplateTagsConfig',
-    'django_class_based_app.apps.DjangoClassBasedAppConfig'
+    'django_class_based_app.apps.DjangoClassBasedAppConfig',
+    'django_send_mails.apps.DjangoSendMailsConfig'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +135,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = "/admin/login/"
 LOGOUT_URL = "/admin/logout/"
+
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST=config.get('email', 'EMAIL_HOST')
+EMAIL_PORT=config.get('email', 'EMAIL_PORT')
+EMAIL_HOST_USER=config.get('email', 'EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=config.get('email', 'EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL=config.get('email', 'EMAIL_USE_SSL')

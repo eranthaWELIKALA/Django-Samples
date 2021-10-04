@@ -1,8 +1,9 @@
+from django.http.response import HttpResponse
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic.list import ListView
@@ -60,10 +61,27 @@ class CourseCreateView(CreateView):
 # In list views 
 # This will return the context as below
 # context['courses'] = Course.objects.all()
-class CourseListView(LoginRequiredMixin, ListView):
+class CourseListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Course
     context_object_name = 'courses'
     template_name = "django_class_based_app/course_list.html" # This Course List will look for course_list.html by default
+
+    
+    # LoginRequiredMixin Values
+    login_url = '/account/login/'
+    redirect_field_name = ''
+
+    # UserPassesTestMixin function
+    email_latter = '.com'
+    def test_func(self):
+        return self.request.user.email.endswith(self.email_latter)        
+
+    def handle_no_permission(self):
+        return HttpResponse(
+            {
+                "Only users have email that ends with '{}' has access".format(self.email_latter)
+            }
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

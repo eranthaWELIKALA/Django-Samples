@@ -56,4 +56,5 @@ documents
 fileuploads
 
 db.sqlite3
+*/django_sample.config
 
